@@ -1,4 +1,4 @@
-openapi:'3.0.1'
+openapi: '3.1.0'
 info:
   title: BOTB Plugin
   description: Access VMs, crypto, devices, logs, and zip files.
@@ -8,6 +8,7 @@ servers:
 paths:
   /crypto/{symbol}:
     get:
+      operationId: get_crypto_price
       summary: Get crypto price
       parameters:
         - in: path
