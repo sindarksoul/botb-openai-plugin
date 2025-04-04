@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles  # ⬅️ Added this
+
 from utils.crypto_fetch import get_crypto_price
 from utils.zip_utils import extract_zip
 from utils.log_parser import parse_log
@@ -7,6 +9,9 @@ from utils.vm_control import control_vm
 from utils.device_control import control_device
 
 app = FastAPI(title="BOTB Plugin", description="Local File + Device + Crypto Assistant")
+
+# ⬇️ Serve static files (for legal.html, logo.png, etc.)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/healthz")
 def health_check():
