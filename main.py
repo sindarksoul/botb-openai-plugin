@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles  # ⬅️ Added this
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 
 from utils.crypto_fetch import get_crypto_price
 from utils.zip_utils import extract_zip
@@ -10,10 +10,20 @@ from utils.device_control import control_device
 
 app = FastAPI(title="BOTB Plugin", description="Local File + Device + Crypto Assistant")
 
-# ⬇️ Serve static files (for legal.html, logo.png, etc.)
+# ✅ Serve static files like logo.png and legal.html
 app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/.well-known", StaticFiles(directory=".well-known"), name="wellknown")
 
+# ✅ Serve plugin manifest file
+@app.get("/.well-known/ai-plugin.json")
+async def plugin_manifest():
+    return FileResponse(".well-known/ai-plugin.json", media_type="application/json")
+
+# ✅ Serve OpenAPI schema file
+@app.get("/openapi.yaml")
+async def openapi_spec():
+    return FileResponse("openapi.yaml", media_type="text/yaml")
+
+# Health check
 @app.get("/healthz")
 def health_check():
     return {"status": "alive"}
