@@ -7,7 +7,7 @@
   "auth": { "type": "none" },
   "api": {
     "type": "openapi",
-    "url": "https://botb-openai-plugin.onrender.com"
+    "url": "https://botb-openai-plugin.onrender.com/openapi.yaml"
   },
   "logo_url": "https://botb-openai-plugin.onrender.com/static/logo.png",
   "contact_email": "botb.assist@gmail.com",
