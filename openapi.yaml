@@ -1,0 +1,26 @@
+openapi: 3.0.1
+info:
+  title: BOTB Plugin
+  description: Access VMs, crypto, devices, logs, and zip files.
+  version: "1.0.0"
+servers:
+  - url: https://YOUR-DEPLOYED-URL
+paths:
+  /crypto/{symbol}:
+    get:
+      summary: Get crypto price
+      parameters:
+        - in: path
+          name: symbol
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Crypto price
+  /healthz:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: OK
