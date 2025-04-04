@@ -12,6 +12,7 @@ app = FastAPI(title="BOTB Plugin", description="Local File + Device + Crypto Ass
 
 # ⬇️ Serve static files (for legal.html, logo.png, etc.)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/.well-known", StaticFiles(directory=".well-known"), name="wellknown")
 
 @app.get("/healthz")
 def health_check():
