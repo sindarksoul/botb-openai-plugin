@@ -5,9 +5,8 @@ def get_crypto_price(symbol: str):
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={symbol.lower()}&vs_currencies=usd"
         headers = {
             "Accept": "application/json",
-            "User-Agent": "botb-openai-plugin/1.0"
+            "User-Agent": "Mozilla/5.0 (compatible; BOTB-Plugin/1.0; +https://botb-openai-plugin.onrender.com)"
         }
-
         response = requests.get(url, headers=headers)
 
         if response.status_code != 200:
