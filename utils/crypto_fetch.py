@@ -2,10 +2,10 @@ import requests
 
 def get_crypto_price(symbol: str):
     try:
-        url = f"https://api.coingecko.com/api/v3/simple/price?ids={symbol.lower()}&vs_currencies=usd"
+        url = f"https://api.coincap.io/v2/assets/{symbol.lower()}"
         headers = {
             "Accept": "application/json",
-            "User-Agent": "Mozilla/5.0 (compatible; BOTB-Plugin/1.0; +https://botb-openai-plugin.onrender.com)"
+            "User-Agent": "BOTB-Plugin/1.0"
         }
         response = requests.get(url, headers=headers)
 
@@ -13,13 +13,11 @@ def get_crypto_price(symbol: str):
             return {"error": f"External API error: {response.status_code}"}
 
         data = response.json()
-
-        if symbol.lower() not in data:
-            return {"error": f"Symbol '{symbol}' not found in API response."}
+        price = data["data"]["priceUsd"]
 
         return {
             "symbol": symbol.upper(),
-            "price_usd": data[symbol.lower()]["usd"]
+            "price_usd": float(price)
         }
 
     except Exception as e:
