@@ -1,1 +1,0 @@
-# botb-openai-plugin
