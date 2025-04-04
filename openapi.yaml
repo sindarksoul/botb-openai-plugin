@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: '3.0.1'
 info:
   title: BOTB Plugin
   description: Access VMs, crypto, devices, logs, and zip files.
@@ -20,6 +20,7 @@ paths:
           description: Crypto price
   /healthz:
     get:
+      operationId: get_health_status
       summary: Health check
       responses:
         '200':
