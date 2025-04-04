@@ -1,6 +1,22 @@
 import requests
 
 def get_crypto_price(symbol: str):
-    url = f"https://api.coingecko.com/api/v3/simple/price?ids={symbol}&vs_currencies=usd"
-    res = requests.get(url)
-    return res.json()
+    try:
+        url = f"https://api.coingecko.com/api/v3/simple/price?ids={symbol.lower()}&vs_currencies=usd"
+        response = requests.get(url)
+
+        if response.status_code != 200:
+            return {"error": f"External API error: {response.status_code}"}
+
+        data = response.json()
+
+        if symbol.lower() not in data:
+            return {"error": f"Symbol '{symbol}' not found in API response."}
+
+        return {
+            "symbol": symbol.upper(),
+            "price_usd": data[symbol.lower()]["usd"]
+        }
+
+    except Exception as e:
+        return {"error": f"Internal exception: {str(e)}"}
