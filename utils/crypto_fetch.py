@@ -3,7 +3,12 @@ import requests
 def get_crypto_price(symbol: str):
     try:
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={symbol.lower()}&vs_currencies=usd"
-        response = requests.get(url)
+        headers = {
+            "Accept": "application/json",
+            "User-Agent": "botb-openai-plugin/1.0"
+        }
+
+        response = requests.get(url, headers=headers)
 
         if response.status_code != 200:
             return {"error": f"External API error: {response.status_code}"}
