@@ -4,7 +4,7 @@ info:
   description: Access VMs, crypto, devices, logs, and zip files.
   version: "1.0.0"
 servers:
-  - url: https://YOUR-DEPLOYED-URL
+  - url: https://botb-openai-plugin.onrender.com
 paths:
   /crypto/{symbol}:
     get:
